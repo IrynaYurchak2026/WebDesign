@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Демонстрація інтеграції Slick Carousel</title>
+    
+    <!-- Підключаємо Tailwind CSS для сучасного та швидкого оформлення сторінки -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- 
+      КРОК 1: ПІДКЛЮЧЕННЯ СТИЛІВ SLICK CAROUSEL
+      - slick.css: Базові стилі позиціонування та логіки слайдера (обов'язково).
+      - slick-theme.css: Готова стилізація стрілок, точок та базових ефектів (опціонально, але спрощує запуск).
+    -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
+
+    <!-- Кастомні стилі для адаптації стандартних стрілок Slick під наш дизайн -->
+    <style>
+        /* Стилізуємо стандартні стрілки Slick, щоб вони виглядали сучасно */
+        .slick-prev, .slick-next {
+            width: 45px;
+            height: 45px;
+            background-color: #4f46e5 !important; /* Indigo-600 */
+            border-radius: 50%;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+        .slick-prev {
+            left: -25px;
+        }
+        .slick-next {
+            right: -25px;
+        }
+        .slick-prev:hover, .slick-next:hover {
+            background-color: #4338ca !important; /* Darker Indigo */
+            transform: scale(1.1);
+        }
+        /* Стилізуємо стандартні навігаційні точки */
+        .slick-dots li button:before {
+            font-size: 12px;
+            color: #4f46e5 !important;
+        }
+        .slick-dots li.slick-active button:before {
+            color: #4338ca !important;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-white min-h-screen flex flex-col justify-between font-sans">
+
+    <!-- Хедер сторінки -->
+    <header class="border-b border-slate-800 bg-slate-950/50 backdrop-blur py-6">
+        <div class="max-w-6xl mx-auto px-6 flex justify-between items-center">
+            <div>
+                <span class="text-xs font-bold tracking-widest text-indigo-400 uppercase">Лабораторна робота №9</span>
+                <h1 class="text-2xl font-black">Slick Carousel <span class="text-indigo-500">Integration</span></h1>
+            </div>
+            <span class="bg-indigo-500/10 text-indigo-400 text-xs px-3 py-1.5 rounded-full border border-indigo-500/20 font-mono">
+                jQuery + Slick v1.8.1
+            </span>
+        </div>
+    </header>
+
+    <!-- Основний контент -->
+    <main class="max-w-5xl mx-auto px-6 py-12 w-full flex-grow">
+        
+        <!-- Інформаційна картка розробника -->
+        <div class="mb-12 p-6 bg-slate-950/40 rounded-2xl border border-slate-800 flex items-start gap-4">
+            <div class="p-3 bg-indigo-600/10 rounded-xl border border-indigo-500/20 text-indigo-400 text-2xl">
+                💡
+            </div>
+            <div>
+                <h3 class="font-bold text-lg mb-1">Порада від Веб-технолога:</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">
+                    Зверніть увагу на черговість підключення скриптів наприкінці файлу. Оскільки Slick є плагіном для <span class="text-indigo-400 font-semibold">jQuery</span>, спочатку ми обов'язково завантажуємо саму бібліотеку jQuery, потім плагін Slick, і лише в самому кінці ініціалізуємо наш слайдер. Порушення цього порядку — найчастіша помилка новачків!
+                </p>
+            </div>
+        </div>
+
+        <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
+            <span class="w-2.5 h-2.5 bg-indigo-500 rounded-full animate-pulse"></span>
+            Наші проєкти (Приклад Slick-слайдера)
+        </h2>
+
+        <!-- 
+          КРОК 2: СТРУКТУРНА РОЗМІТКА SLICK CAROUSEL
+          - Контейнер .slick-slider-container є точкою ініціалізації.
+          - Всі прямі нащадки цього дива автоматично стають окремими слайдами.
+        -->
+        <div class="slick-slider-container px-4">
+            
+            <!-- Слайд 1 -->
+            <div class="px-2">
+                <div class="bg-slate-950 rounded-2xl border border-slate-800 overflow-hidden group hover:border-indigo-500/40 transition-all duration-300">
+                    <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=500" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" alt="Проєкт 1">
+                    <div class="p-6">
+                        <span class="text-xs font-semibold text-indigo-400 uppercase tracking-wider">E-Commerce</span>
+                        <h4 class="font-bold text-lg mt-1 mb-2 text-slate-100">Інтернет-магазин одягу</h4>
+                        <p class="text-slate-400 text-sm">Повна розробка дизайну, інтеграція платіжних систем та оптимізація UX.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Слайд 2 -->
+            <div class="px-2">
+                <div class="bg-slate-950 rounded-2xl border border-slate-800 overflow-hidden group hover:border-indigo-500/40 transition-all duration-300">
+                    <img src="https://images.unsplash.com/photo-1581291518655-9523c932dedf?w=500" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" alt="Проєкт 2">
+                    <div class="p-6">
+                        <span class="text-xs font-semibold text-indigo-400 uppercase tracking-wider">Mobile App</span>
+                        <h4 class="font-bold text-lg mt-1 mb-2 text-slate-100">Фінансовий асистент</h4>
+                        <p class="text-slate-400 text-sm">Проектування мобільного інтерфейсу з акцентом на простоту керування бюджетом.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Слайд 3 -->
+            <div class="px-2">
+                <div class="bg-slate-950 rounded-2xl border border-slate-800 overflow-hidden group hover:border-indigo-500/40 transition-all duration-300">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" alt="Проєкт 3">
+                    <div class="p-6">
+                        <span class="text-xs font-semibold text-indigo-400 uppercase tracking-wider">SaaS Product</span>
+                        <h4 class="font-bold text-lg mt-1 mb-2 text-slate-100">CRM система для бізнесу</h4>
+                        <p class="text-slate-400 text-sm">Розробка складної аналітичної панелі керування користувачами та аналітики.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Слайд 4 -->
+            <div class="px-2">
+                <div class="bg-slate-950 rounded-2xl border border-slate-800 overflow-hidden group hover:border-indigo-500/40 transition-all duration-300">
+                    <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=500" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" alt="Проєкт 4">
+                    <div class="p-6">
+                        <span class="text-xs font-semibold text-indigo-400 uppercase tracking-wider">Landing Page</span>
+                        <h4 class="font-bold text-lg mt-1 mb-2 text-slate-100">Презентація ШІ-стартапу</h4>
+                        <p class="text-slate-400 text-sm">Адаптивна посадкова сторінка з унікальними інтерактивними 3D-компонентами.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Футер сторінки -->
+    <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-500 bg-slate-950/40">
+        <div>&copy; 2026 Кафедра веброзробки та комп'ютерних технологій. Всі права захищені.</div>
+    </footer>
+
+    <!-- 
+      КРОК 3: ПІДКЛЮЧЕННЯ СКРИПТІВ (СУВОРИЙ ПОРЯДОК ЗАВАНТАЖЕННЯ!)
+    -->
+    
+    <!-- 3.1. Спочатку обов'язково завантажуємо jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    
+    <!-- 3.2. Після jQuery завантажуємо сам плагін Slick Carousel -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+
+    <!-- 3.3. КРОК 4: ІНІЦІАЛІЗАЦІЯ SLICK ЧЕРЕЗ JQUERY -->
+    <script type="text/javascript">
+        // Переконуємось, що DOM-дерево повністю збудоване
+        $(document).ready(function(){
+            
+            // Ініціалізуємо слайдер за класом нашого контейнера
+            $('.slick-slider-container').slick({
+                dots: true,             // Показувати точки навігації внизу
+                infinite: true,         // Безкінечна циклічність прокрутки
+                speed: 500,             // Швидкість перемикання слайдів (мс)
+                slidesToShow: 3,        // Скільки слайдів показувати одночасно на десктопі
+                slidesToScroll: 1,      // Скільки слайдів прокручувати за один крок
+                autoplay: true,         // Увімкнути автоматичне перегортання
+                autoplaySpeed: 3000,    // Час затримки автоматичного перегортання (мс)
+                arrows: true,           // Показувати бокові стрілки навігації
+                pauseOnHover: true,     // Зупиняти автоплей при наведенні курсору миші
+                
+                // Налаштування адаптивності (аналог breakpoints у Swiper)
+                responsive: [
+                    {
+                        breakpoint: 1024, // Екрани менше 1024px
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 1,
+                            infinite: true,
+                            dots: true
+                        }
+                    },
+                    {
+                        breakpoint: 640,  // Екрани менше 640px (мобільні пристрої)
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1,
+                            arrows: false // Ховаємо стрілки на мобільних для кращого UX
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
+</body>
+</html>
